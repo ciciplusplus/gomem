@@ -115,7 +115,7 @@ func (r *RecyclableMemory) Recycle() {
 
 type MemoryAllocator struct {
 	allocator *Allocator
-	start     int64
+	Start     int64
 	memory    []byte
 	Size      int
 	recycle   func()
@@ -340,7 +340,7 @@ func (sma *ScalableMemoryAllocator) Free(mem []byte) bool {
 	ptr := int64(uintptr(unsafe.Pointer(&mem[0])))
 	size := len(mem)
 	for i, child := range sma.children {
-		if start := int(ptr - child.start); start >= 0 && start < child.Size && child.free(start, size) {
+		if start := int(ptr - child.Start); start >= 0 && start < child.Size && child.free(start, size) {
 			sma.addFreeCount(size)
 			if len(sma.children) > 1 && child.allocator != nil && child.allocator.sizeTree.End-child.allocator.sizeTree.Start == child.Size {
 				child.Recycle()

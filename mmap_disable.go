@@ -1,4 +1,5 @@
 //go:build !enable_mmap
+
 package gomem
 
 import "unsafe"
@@ -9,7 +10,7 @@ func createMemoryAllocator(size int) *MemoryAllocator {
 		allocator: NewAllocator(size),
 		Size:      size,
 		memory:    memory,
-		start:     int64(uintptr(unsafe.Pointer(&memory[0]))),
+		Start:     int64(uintptr(unsafe.Pointer(&memory[0]))),
 	}
 	ret.allocator.Init(size)
 	return ret

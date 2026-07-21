@@ -16,7 +16,7 @@ func BenchmarkMemoryAllocatorMalloc(b *testing.B) {
 		if mem == nil {
 			b.Fatal("Failed to allocate memory")
 		}
-		ma.free(int(int64(uintptr(unsafe.Pointer(&mem[0])))-ma.start), 1024)
+		ma.free(int(int64(uintptr(unsafe.Pointer(&mem[0])))-ma.Start), 1024)
 	}
 }
 
@@ -31,7 +31,7 @@ func BenchmarkMemoryAllocatorMallocSmall(b *testing.B) {
 		if mem == nil {
 			b.Fatal("Failed to allocate memory")
 		}
-		ma.free(int(int64(uintptr(unsafe.Pointer(&mem[0])))-ma.start), 64)
+		ma.free(int(int64(uintptr(unsafe.Pointer(&mem[0])))-ma.Start), 64)
 	}
 }
 
@@ -46,7 +46,7 @@ func BenchmarkMemoryAllocatorMallocLarge(b *testing.B) {
 		if mem == nil {
 			b.Fatal("Failed to allocate memory")
 		}
-		ma.free(int(int64(uintptr(unsafe.Pointer(&mem[0])))-ma.start), 8192)
+		ma.free(int(int64(uintptr(unsafe.Pointer(&mem[0])))-ma.Start), 8192)
 	}
 }
 
@@ -69,7 +69,7 @@ func BenchmarkMemoryAllocatorSequential(b *testing.B) {
 
 		// Free all blocks
 		for j := 0; j < 100; j++ {
-			ma.free(int(int64(uintptr(unsafe.Pointer(&allocations[j][0])))-ma.start), 1024)
+			ma.free(int(int64(uintptr(unsafe.Pointer(&allocations[j][0])))-ma.Start), 1024)
 		}
 	}
 }
@@ -87,7 +87,7 @@ func BenchmarkMemoryAllocatorRandom(b *testing.B) {
 		if mem == nil {
 			b.Fatal("Failed to allocate memory")
 		}
-		ma.free(int(int64(uintptr(unsafe.Pointer(&mem[0])))-ma.start), size)
+		ma.free(int(int64(uintptr(unsafe.Pointer(&mem[0])))-ma.Start), size)
 	}
 }
 
